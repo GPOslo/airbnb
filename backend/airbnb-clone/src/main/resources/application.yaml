@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/airbnb?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&serverTimezone=Asia/Seoul
+    username: airbnb
+    password: airbnb
+
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+logging:
+  level:
+    com.GPOslo: DEBUG
+
+jwt:
+  header: Authoriation
+  secret: aGVsbG8tbXktbmFtZS1pcy1qYWVoeWVvbi10aGlzLWtleS1pcy12ZXJ5LWltcG9ydGFudC1zby1iZS1jYXJlZnVsLXRoYW5rLXlvdS1oYWhh
+  access-token-expire-time: 1800000
+  refresh-token-expire-time: 604800000
