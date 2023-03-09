@@ -3,7 +3,7 @@ package com.GPOslo.airbnbclone.domain.member.service;
 import com.GPOslo.airbnbclone.domain.member.entity.Member;
 import com.GPOslo.airbnbclone.domain.member.entity.MemberRepository;
 import com.GPOslo.airbnbclone.global.exception.handler.BizException;
-import com.GPOslo.airbnbclone.global.auth.entity.Authority;
+import com.GPOslo.airbnbclone.domain.auth.entity.Authority;
 import com.GPOslo.airbnbclone.global.exception.type.MemberExceptionType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

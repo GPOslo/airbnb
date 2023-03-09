@@ -1,6 +1,6 @@
 package com.GPOslo.airbnbclone.domain.member.entity;
 
-import com.GPOslo.airbnbclone.global.auth.entity.Authority;
+import com.GPOslo.airbnbclone.domain.auth.entity.Authority;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;

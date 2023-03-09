@@ -1,4 +1,4 @@
-package com.GPOslo.airbnbclone.global.auth.entity;
+package com.GPOslo.airbnbclone.domain.auth.entity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

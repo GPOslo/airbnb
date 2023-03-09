@@ -1,14 +1,14 @@
-package com.GPOslo.airbnbclone.global.auth.service;
+package com.GPOslo.airbnbclone.domain.auth.service;
 
+import com.GPOslo.airbnbclone.domain.auth.entity.AuthorityRepository;
 import com.GPOslo.airbnbclone.domain.member.dto.LoginReqDTO;
 import com.GPOslo.airbnbclone.domain.member.dto.MemberReqDTO;
 import com.GPOslo.airbnbclone.domain.member.dto.MemberRespDTO;
 import com.GPOslo.airbnbclone.domain.member.entity.Member;
 import com.GPOslo.airbnbclone.domain.member.entity.MemberRepository;
 import com.GPOslo.airbnbclone.domain.member.service.CustomUserDetailService;
-import com.GPOslo.airbnbclone.global.auth.entity.Authority;
-import com.GPOslo.airbnbclone.global.auth.entity.AuthorityRepository;
-import com.GPOslo.airbnbclone.global.auth.entity.MemberAuth;
+import com.GPOslo.airbnbclone.domain.auth.entity.Authority;
+import com.GPOslo.airbnbclone.domain.auth.entity.MemberAuth;
 import com.GPOslo.airbnbclone.global.exception.handler.BizException;
 import com.GPOslo.airbnbclone.global.exception.type.AuthorityExceptionType;
 import com.GPOslo.airbnbclone.global.exception.type.JwtExceptionType;

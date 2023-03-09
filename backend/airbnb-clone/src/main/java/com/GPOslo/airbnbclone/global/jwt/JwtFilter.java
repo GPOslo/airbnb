@@ -29,37 +29,42 @@ public class JwtFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
+
+        filterChain.doFilter(request, response);
+
         // "/auth" 로 시작하는 요청은 그냥 통과
-        if(request.getServletPath().startsWith("/auth")) {
-            filterChain.doFilter(request, response);
-        } else {    // 그 외의 요청은 토큰의 값을 검사
-            String token = resolveToken(request);
-
-            log.debug("token = {}", token);
-
-            if(StringUtils.hasText(token)) {
-                final int flag = tokenProvider.validateToken(token);
-
-                log.debug("flag = {}", flag);
-                // 토큰이 유효한 경우
-                if (flag == 1) {
-                    this.setAuthentication(token);
-                } else if(flag == 2) {      // 토큰이 만료된 경우
-                    response.setContentType("application/json");
-                    response.setStatus(HttpServletResponse.SC_FORBIDDEN);   // 403
-                    response.setCharacterEncoding("UTF-8");
-                    PrintWriter out = response.getWriter();
-                    log.debug("doFilterInternal Exception CALL!");
-                    out.println("{\"error\" : \"ACCESS_TOKEN_EXPIRED\", \"message\" : \"엑세스 토큰이 만료되었습니다.\"}");
-                } else {    // 잘못된 토큰인 경우
-                    response.setContentType("application/json");
-                    response.setStatus(HttpServletResponse.SC_FORBIDDEN);   // 403
-                    response.setCharacterEncoding("UTF-8");;
-                    PrintWriter out = response.getWriter();
-                    out.println("{\"error\": \"EMPTY_TOKEN\", \"message\" : \"토큰 값이 비어있습니다.\"}");
-                }
-            }
-        }
+//        if(request.getServletPath().startsWith("/auth")) {
+//            filterChain.doFilter(request, response);
+//        } else {    // 그 외의 요청은 토큰의 값을 검사
+//            String token = resolveToken(request);
+//
+//            log.debug("token = {}", token);
+//
+//            if(StringUtils.hasText(token)) {
+//                final int flag = tokenProvider.validateToken(token);
+//
+//                log.debug("flag = {}", flag);
+//                // 토큰이 유효한 경우
+//                if (flag == 1) {
+//                    this.setAuthentication(token);
+//                } else if(flag == 2) {      // 토큰이 만료된 경우
+//                    response.setContentType("application/json");
+//                    response.setStatus(HttpServletResponse.SC_FORBIDDEN);   // 403
+//                    response.setCharacterEncoding("UTF-8");
+//                    PrintWriter out = response.getWriter();
+//                    log.debug("doFilterInternal Exception CALL!");
+//                    out.println("{\"error\" : \"ACCESS_TOKEN_EXPIRED\", \"message\" : \"엑세스 토큰이 만료되었습니다.\"}");
+//                } else {    // 잘못된 토큰인 경우
+//                    response.setContentType("application/json");
+//                    response.setStatus(HttpServletResponse.SC_FORBIDDEN);   // 403
+//                    response.setCharacterEncoding("UTF-8");;
+//                    PrintWriter out = response.getWriter();
+//                    out.println("{\"error\": \"EMPTY_TOKEN\", \"message\" : \"토큰 값이 비어있습니다.\"}");
+//                }
+//            } else {
+//                filterChain.doFilter(request, response);
+//            }
+//        }
 
     }
 

@@ -1,6 +1,8 @@
 package com.GPOslo.airbnbclone.global.jwt;
 
-import com.GPOslo.airbnbclone.global.auth.entity.Authority;
+import com.GPOslo.airbnbclone.domain.auth.entity.Authority;
+import com.GPOslo.airbnbclone.global.exception.handler.BizException;
+import com.GPOslo.airbnbclone.global.exception.type.AuthorityExceptionType;
 import com.GPOslo.airbnbclone.global.jwt.dto.TokenDTO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -117,13 +119,13 @@ public class TokenProvider {
                 .build();
     }
 
-    public Authentication getAuthentication(String accessToken) {
+    public Authentication getAuthentication(String accessToken) throws BizException {
         // 토큰 복호화
         Claims claims = parseClaims(accessToken);
 
         if (claims.get(AUTHORITIES_KEY) == null || !StringUtils.hasText(claims.get(AUTHORITIES_KEY).toString())) {
             // 유저에게 아무런 권한이 없음
-            // throw new CustomException()
+             throw new BizException(AuthorityExceptionType.NOT_FOUND_AUTHORITY);
         }
 
         log.debug("cliams.getAuth = {}", claims.get(AUTHORITIES_KEY));

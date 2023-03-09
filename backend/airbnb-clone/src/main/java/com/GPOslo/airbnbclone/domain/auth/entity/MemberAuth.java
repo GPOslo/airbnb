@@ -1,4 +1,4 @@
-package com.GPOslo.airbnbclone.global.auth.entity;
+package com.GPOslo.airbnbclone.domain.auth.entity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +17,6 @@ public enum MemberAuth {
         }
     }
 
-    // private
     MemberAuth(String abbreviation) {
         this.abbreviation = abbreviation;
     }

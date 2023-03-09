@@ -1,7 +1,7 @@
 package com.GPOslo.airbnbclone.domain.member.dto;
 
 import com.GPOslo.airbnbclone.domain.member.entity.Member;
-import com.GPOslo.airbnbclone.global.auth.entity.Authority;
+import com.GPOslo.airbnbclone.domain.auth.entity.Authority;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.crypto.password.PasswordEncoder;

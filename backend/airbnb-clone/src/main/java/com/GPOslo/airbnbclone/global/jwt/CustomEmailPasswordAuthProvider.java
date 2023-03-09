@@ -22,6 +22,7 @@ public class CustomEmailPasswordAuthProvider implements AuthenticationProvider {
     private final CustomUserDetailService customUserDetailService;
     private GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
 
+    // 비밀번호 확인
     protected void additionalAuthenticationChecks(UserDetails userDetails,
                                                   CustomEmailPasswordAuthToken authentication)
             throws BizException {
@@ -56,6 +57,7 @@ public class CustomEmailPasswordAuthProvider implements AuthenticationProvider {
                 , this.authoritiesMapper.mapAuthorities(user.getAuthorities())
         );
 
+        log.debug("authentication.getDetails() = {}", authentication.getDetails());
         additionalAuthenticationChecks(user, result);
         result.setDetails(authentication.getDetails());
         return result;

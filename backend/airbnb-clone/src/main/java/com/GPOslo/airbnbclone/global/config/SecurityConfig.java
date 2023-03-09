@@ -1,5 +1,6 @@
 package com.GPOslo.airbnbclone.global.config;
 
+import com.GPOslo.airbnbclone.domain.auth.entity.MemberAuth;
 import com.GPOslo.airbnbclone.global.jwt.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -35,7 +36,7 @@ public class SecurityConfig {
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> {
             web.ignoring()
-                    .antMatchers("/h2-console/**", "/favicon.ico");
+                    .antMatchers("/h2-console/**", "favicon.ico");
         };
     }
 
@@ -45,8 +46,8 @@ public class SecurityConfig {
         http.csrf().disable()
                 // exception handling 할 때 커스텀 클래스를 추가
                 .exceptionHandling()
-                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                .accessDeniedHandler(jwtAccessDeniedHandler)
+//                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+//                .accessDeniedHandler(jwtAccessDeniedHandler)
                 /* iframe 관련 설정이고 X-frame-Options Click Jaking 공격을 기본적으로 막는걸로 설정되어있는데
                  이를 풀기위한 설정을 하려면 아래의 설정을 추가하면 됨 */
                 /* .and()
@@ -64,14 +65,18 @@ public class SecurityConfig {
                 // http servletRequest 를 사용하는 요청들에 대한 접근제한을 설정
                 .authorizeRequests()
 
+                // /admin 경로로의 요청은 ROLE_ADMIN 인 사용자만 가능
+                .antMatchers("/admin/**").hasAnyRole(MemberAuth.ROLE_ADMIN.getAbbreviation())
+
                 // 로그인, 회원가입 API 는 토큰이 없는 상태에서 요청이 들어오기 때문에 permitAll 설정
-                .antMatchers("/auth/**").permitAll()
+//                .antMatchers("/auth/**").permitAll()
 
                 // swagger 3 관련 요청 permitAll 설정
                 .antMatchers("/v3/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**").permitAll()
 
-                // 나머지 API 는 전부 인증 필요
-                .anyRequest().authenticated()
+//                 나머지 API 는 전부 인증 필요
+//                .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and()
 
                 // JwtFilter 등록
