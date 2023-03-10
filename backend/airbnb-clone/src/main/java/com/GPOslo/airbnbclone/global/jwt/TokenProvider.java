@@ -3,6 +3,7 @@ package com.GPOslo.airbnbclone.global.jwt;
 import com.GPOslo.airbnbclone.domain.auth.entity.Authority;
 import com.GPOslo.airbnbclone.global.exception.handler.BizException;
 import com.GPOslo.airbnbclone.global.exception.type.AuthorityExceptionType;
+import com.GPOslo.airbnbclone.global.jwt.domain.TokenStatus;
 import com.GPOslo.airbnbclone.global.jwt.dto.TokenDTO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -145,16 +146,16 @@ public class TokenProvider {
         return new CustomEmailPasswordAuthToken(principal, "", authorities);
     }
 
-    public int validateToken(String token) {
+    public TokenStatus validateToken(String token) {
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
-            return 1;
+            return TokenStatus.VALID_TOKEN;
         } catch(ExpiredJwtException e) {
             log.info("만료된 JWT 토큰입니다.");
-            return 2;
+            return TokenStatus.EXPIRED_TOKEN;
         } catch(Exception e) {
             log.info("잘못된 토큰입니다.");
-            return -1;
+            return TokenStatus.WRONG_TOKEN;
         }
     }
 

@@ -17,6 +17,7 @@ import com.GPOslo.airbnbclone.global.jwt.CustomEmailPasswordAuthToken;
 import com.GPOslo.airbnbclone.global.jwt.TokenProvider;
 import com.GPOslo.airbnbclone.global.jwt.domain.RefreshToken;
 import com.GPOslo.airbnbclone.global.jwt.domain.RefreshTokenRepository;
+import com.GPOslo.airbnbclone.global.jwt.domain.TokenStatus;
 import com.GPOslo.airbnbclone.global.jwt.dto.TokenDTO;
 import com.GPOslo.airbnbclone.global.jwt.dto.TokenReqDTO;
 import lombok.RequiredArgsConstructor;
@@ -88,13 +89,13 @@ public class AuthService {
         String originAccessToken = tokenRequestDto.getAccessToken();
         String originRefreshToken = tokenRequestDto.getRefreshToken();
 
-        int refreshTokenFlag = tokenProvider.validateToken(originRefreshToken);
+        TokenStatus refreshTokenFlag = tokenProvider.validateToken(originRefreshToken);
 
         log.debug("refreshTokenFlag = {}", refreshTokenFlag);
 
-        if(refreshTokenFlag == -1) {
+        if(refreshTokenFlag == TokenStatus.WRONG_TOKEN) {
             throw new BizException(JwtExceptionType.BAD_TOKEN);
-        } else if(refreshTokenFlag == 2) {
+        } else if(refreshTokenFlag == TokenStatus.EXPIRED_TOKEN) {
             throw new BizException(JwtExceptionType.REFRESH_TOKEN_EXPIRED);
         }
 

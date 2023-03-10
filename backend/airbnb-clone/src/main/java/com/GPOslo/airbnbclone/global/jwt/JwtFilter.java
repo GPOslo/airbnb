@@ -1,5 +1,6 @@
 package com.GPOslo.airbnbclone.global.jwt;
 
+import com.GPOslo.airbnbclone.global.jwt.domain.TokenStatus;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -29,6 +30,21 @@ public class JwtFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
+        String token = resolveToken(request);
+        log.debug("token = {}", token);
+
+        if(StringUtils.hasText(token)) {
+            final TokenStatus flag = tokenProvider.validateToken(token);
+
+            log.debug("flag = {}", flag);
+            if(flag == TokenStatus.VALID_TOKEN) {
+                this.setAuthentication(token);
+            } else if (flag == TokenStatus.EXPIRED_TOKEN) {
+                // 클라이언트가 reissue 요청을 하도록 약속된 JSON 값을 전달 해야한다.
+            } else { // (flag == TokenStatus.WRONG_TOKEN) {
+
+            }
+        }
 
         filterChain.doFilter(request, response);
 
