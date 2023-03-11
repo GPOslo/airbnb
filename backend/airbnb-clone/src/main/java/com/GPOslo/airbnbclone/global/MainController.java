@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("")
 public class MainController {
-    @GetMapping("/")
+    @GetMapping("")
     public List<String> index() {
         System.out.println("여기 오긴 하니?");
         return List.of("hello", "bye");
