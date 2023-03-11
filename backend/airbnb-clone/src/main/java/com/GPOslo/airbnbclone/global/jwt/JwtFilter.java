@@ -42,7 +42,8 @@ public class JwtFilter extends OncePerRequestFilter {
             } else if (flag == TokenStatus.EXPIRED_TOKEN) {
                 // 클라이언트가 reissue 요청을 하도록 약속된 JSON 값을 전달 해야한다.
             } else { // (flag == TokenStatus.WRONG_TOKEN) {
-
+                // 잘못된 토큰값을 전달
+                // 로그아웃
             }
         }
 

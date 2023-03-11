@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("auth")
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthService authService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<String> auth() {
         log.info("/auth");
         return ResponseEntity.ok("hello~!!!");
