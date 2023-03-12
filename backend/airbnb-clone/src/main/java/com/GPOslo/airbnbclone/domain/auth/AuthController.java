@@ -31,6 +31,12 @@ public class AuthController {
         return authService.signup(memberRequestDto);
     }
 
+    @PostMapping("/signup-test")
+    public MemberRespDTO signupTest(@ModelAttribute MemberReqDTO memberRequestDto) {
+        log.debug("memberRequestDto = {}", memberRequestDto);
+        return authService.signup(memberRequestDto);
+    }
+
     @PostMapping("/login")
     public TokenDTO login(@RequestBody LoginReqDTO loginReqDTO) {
         return authService.login(loginReqDTO);
