@@ -30,9 +30,6 @@ const authFormSubmitHandler = async event => {
         };
         const loginRes = await login(loginPayload);
         if (loginRes === "fail") return;
-        // const userInfo = await getCurrentUserInfo();
-        // if (userInfo === null) return;
-        alert("success");
     } else {
         // 회원가입
         const signupPayload = {
